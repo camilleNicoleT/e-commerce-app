@@ -1,57 +1,60 @@
 // Assignment code here
-
-
 var password = ""
-var lowerConf = "abcdefghijklmnopqrstuvwxyz"
-var upperConf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var numberConf = "0123456789"
-var specialConf = "!#$%&()*+,-./:;<=>?@[^_`{|}~"
+var lowerConfirm = ["abcdefghijklmnopqrstuvwxyz"]
+var upperConfirm = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+var numberConfirm = ['0123456789']
+var specialConfirm = ["!#$%&()*+,-./:;<=>?@[^_`{|}~"]
 
-var passwordRequirements = function() {
+var passwordRequirements = function(password, lowerConfirm, upperConfirm, specialConfirm) {
   passLength = function() {
-    var passwordLength = window.prompt ("How long would you like your password to be?")
+    var passwordLength = window.prompt ("How long would you like your password to be?");
       passwordLength = parseInt(passwordLength);
+    
     if (passwordLength < 8) {
       alert("Please use a number equal to or greater than 8.")
+      return passLength();
     } else if (passwordLength > 128) {
     alert("Please use a number equal or greater than 128")
+      return passLength();
     } else {
       return passwordLength;
     }
   }
+  passLength();
   //Ask if password needs uppercase letters
-    var uppercase = confirm ("Do you need uppercase letters in your password?")
-      console.log(uppercase);
-        if (uppercase = confirm) {
-          uppercase = upperConf
+    var uppercase = window.confirm ("Do you need uppercase letters in your password?")
+     // console.log(uppercase);
+        if (uppercase) {
+          uppercase = upperConfirm
         } else {
           uppercase = ""
         }
   //Ask if password needs lowercase letters
-      var lowercase = confirm ("Do you need lowercase letters in your password?")
-      console.log (lowercase);
-      if (lowercase = confirm) {
-        lowercase = lowerConf      
+    var lowercase = window.confirm ("Do you need lowercase letters in your password?")
+     // console.log (lowercase);
+      if (lowercase) {
+        lowercase = lowerConfirm      
       } else {
         lowercase = ""
       }
     //Ask if password needs numbers
-      var specialCharacter = confirm ("Do you need special characters?")
-      console.log (specialCharacter);
-      if (specialCharacter = confirm) {
-        numbers = specialConf
+    var specialCharacter = window.confirm ("Do you need special characters?")
+     // console.log (specialCharacter);
+      if (specialCharacter) {
+        specialCharacter = specialConfirm
       } else {
-        specialCharacter = ""
+        specialCharacter = "";
       }
     //Ask if password needs numbers
-      var numbers = confirm ("Do you need numbers in your password")
-      console.log (numbers);
-      if (numbers = confirm) {
-        number = numberConf;
+      var numbers = window.confirm ("Do you need numbers in your password")
+    //  console.log (numbers);
+      if (numbers) {
+        numbers = numberConfirm;
       } else {
-        numbers = ""
+        numbers = "";
       }
-  password = upperConf + lowerConf + numberConf + specialConf; 
+      
+password = upperConfirm + lowerConfirm + numberConfirm + specialConfirm; 
     return;
 };
 
@@ -61,11 +64,10 @@ function gather() {
   //make password an array
   var passwordArray = password.split("");
   //set the password length
-  while (passwordArray.length < passLength) {
+  while (passwordArray.length < length) {
     passwordArray = passwordArray.concat(passwordArray);
   }
-
-  //randomizer
+   //randomizer
   passwordArray = passwordArray.sort(() => Math.random() - 0.5);
   //password length
   passwordArray.length = length
