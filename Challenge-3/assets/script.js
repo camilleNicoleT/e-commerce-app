@@ -1,48 +1,96 @@
 // Assignment code here
 
 
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+var password = ""
+var lowerConf = "abcdefghijklmnopqrstuvwxyz"
+var upperConf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var numberConf = "0123456789"
+var specialConf = "!#$%&()*+,-./:;<=>?@[^_`{|}~"
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+var passwordRequirements = function() {
+  passLength = function() {
+    var passwordLength = window.prompt ("How long would you like your password to be?")
+      passwordLength = parseInt(passwordLength);
+    if (passwordLength < 8) {
+      alert("Please use a number equal to or greater than 8.")
+    } else if (passwordLength > 128) {
+    alert("Please use a number equal or greater than 128")
+    } else {
+      return passwordLength;
+    }
+  }
+  //Ask if password needs uppercase letters
+    var uppercase = confirm ("Do you need uppercase letters in your password?")
+      console.log(uppercase);
+        if (uppercase = confirm) {
+          uppercase = upperConf
+        } else {
+          uppercase = ""
+        }
+  //Ask if password needs lowercase letters
+      var lowercase = confirm ("Do you need lowercase letters in your password?")
+      console.log (lowercase);
+      if (lowercase = confirm) {
+        lowercase = lowerConf      
+      } else {
+        lowercase = ""
+      }
+    //Ask if password needs numbers
+      var specialCharacter = confirm ("Do you need special characters?")
+      console.log (specialCharacter);
+      if (specialCharacter = confirm) {
+        numbers = specialConf
+      } else {
+        specialCharacter = ""
+      }
+    //Ask if password needs numbers
+      var numbers = confirm ("Do you need numbers in your password")
+      console.log (numbers);
+      if (numbers = confirm) {
+        number = numberConf;
+      } else {
+        numbers = ""
+      }
+  password = upperConf + lowerConf + numberConf + specialConf; 
+    return;
+};
 
-  passwordText.value = password;
 
+function gather() {
+  var passwordArray = [];
+  //make password an array
+  var passwordArray = password.split("");
+  //set the password length
+  while (passwordArray.length < passLength) {
+    passwordArray = passwordArray.concat(passwordArray);
+  }
+
+  //randomizer
+  passwordArray = passwordArray.sort(() => Math.random() - 0.5);
+  //password length
+  passwordArray.length = length
+  //make it into a string
+  password = passwordArray.join(" ");
+  return;
 }
 
 function generatePassword() {
-  var passwordLength = prompt ("What is the length of your password?")
-console.log(passwordLength)
-if (passwordLength < 8) {
-  alert("Please use a number equal to or greater than 8.")
-} else if (passwordLength > 128) {
-alert("Please use a number equal or greater than 28")
-} else {
-  var uppercase = confirm ("Do you need uppercase letters in your password?")
-  console.log(uppercase)
-    if ()
-  var lowercase = confirm ("Do you need lowercase letters in your password?")
-  console.log (lowercase)
-  var specialCharacter = confirm ("Do you need special characters?")
-  console.log (specialCharacter)
-  
-  var numbers = confirm ("Do you need numbers in your password")
-  console.log (numbers);
+  //collect password input
+  passwordRequirements();
+  //combine all characters
+  gather();
+  //password provided to user
+  window.alert("Your new password is " + password);
+};
+
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+function writePassword() {
+  generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 }
 
-//use inner html or innertext
-
-for (i = 0; i < passwordLength; i++){
-//1.math.floor (math.random) use the length of th e element array to determine the lower and upper bound
-//2. another for loop using the math.floor get the value of the element at the randomly generated index. it will be the value that i got from step 1
-//a. can create a string and just keep adding to the string or create another array after it generates a password
-}
-}
-// return generatePassword;
-
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-//"Your password is " + password 
