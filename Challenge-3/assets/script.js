@@ -78,32 +78,33 @@ var passwordRequirements = function() {
       } 
 };
 
-
-function writePassword() {
+/*This function ensures the information is placed in the correct identifier*/
+ function writePassword() {
   generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = getRandomString(passwordLength); 
 };
-/**
- * 
- * @param {number} length This is where we pass in password along with random string information
- * @returns {string}
- */
+
+//Combine requirements with random selection
 function generatePassword() {
   //collect password input
   passwordRequirements();
   getRandomString();
-  //password provided to user
-  window.alert("Your unique password is " + password);
+  //password provided to user;
 };
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-
+//Start the process of making the password
 generateBtn.addEventListener("click", writePassword);
 
+/**
+ * 
+ * @param {number} length This is where we pass in password along with random string information
+ * @returns {string}
+ */
 function getRandomString(length) {
   var randomChars = wordBank.join("")
   var result = '';
