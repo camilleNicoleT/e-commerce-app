@@ -8,6 +8,7 @@ var specialConfirm = ["!#$%&()*+,-./:;<=>?@[^_`{|}~"]
 var passwordLength = ""
 var wordBank = [];
 
+//All of the choices that were selected now combined into a string
 var inputConfirmed = function(choice) {
   console.log(choice);
   if (choice == "upper") {
@@ -26,8 +27,9 @@ var inputConfirmed = function(choice) {
  console.log(wordBank.join(""));
 };
 
-
+// Collect users password requirements by asking a series of questions
 var passwordRequirements = function() {
+  //gather the number of characters needed
   passLength = function() {
     passwordLength = window.prompt ("How long would you like your password to be?");
       passwordLength = parseInt(passwordLength);
@@ -49,8 +51,6 @@ var passwordRequirements = function() {
      console.log(uppercase);
         if (uppercase == true) {
            inputConfirmed("upper");
-        // } else {
-        //   uppercase = ""
         }
   //Ask if password needs lowercase letters
     var lowercase = window.confirm ("Do you need lowercase letters in your password?")
@@ -58,8 +58,6 @@ var passwordRequirements = function() {
       if (lowercase == true) {
         inputConfirmed("lower");
       } 
-      // else {
-      //  lowercase = ""
       
     //Ask if password needs numbers
     var specialCharacter = window.confirm ("Do you need special characters?")
@@ -67,9 +65,7 @@ var passwordRequirements = function() {
       if (specialCharacter == true) {
         inputConfirmed('special')
       }
-      //  else {
-      //   specialCharacter = "";
-      // }
+     
     //Ask if password needs numbers
       var numbers = window.confirm ("Do you need numbers in your password")
     console.log (numbers);
