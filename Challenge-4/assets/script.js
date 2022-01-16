@@ -23,7 +23,7 @@ var questions = [
   {
     question: "What are the six primitive data types in JavaScript?",
     option1: "sentence, int, truthy, bigInt, symbol, undefined",
-    option2: "string, number, boolean, bigInt, symbol, undefined",
+    option2: "string, number, boolean, null, symbol, undefined",
     option3: "string, num, falsy, bigInt, symbol, undefined",
     option4: "sentence, float, data, bigInt, symbol, undefined",
     correct: 2,
@@ -42,19 +42,18 @@ var questions = [
   },
   {
     question: "How do we declare a conditional statement in JavaScript?",
-    option1: "Colon (:)",
-    option2: "Equal sign (=)",
-    option3: "Double-equal (==)",
-    option4: "Question mark (?)",
-    correct: 2,
+    option1: "if...else",
+    option2: "For loop",
+    option3: "difference...between",
+    option4: "While loop",
+    correct: 1,
   },
   {
-    question:
-      "From the given array which index is the letter 'b' on? ['a', 'b', 'c', 'd']",
-    option1: "Colon (:)",
-    option2: "Equal sign (=)",
-    option3: "Double-equal (==)",
-    option4: "Question mark (?)",
+    question: "From the given array which index is the letter 'b' on? ['a', 'b', 'c', 'd']",
+    option1: "0",
+    option2: "1",
+    option3: "3",
+    option4: "2",
     correct: 2,
   },
 ];
@@ -64,8 +63,16 @@ var timeCountdown = function () {
     timeLeftEl.textContent = time;
     time--;
   }, 1000);
-};
+    if (time < 0) {
+        console.log("Your Time Is Up");
+        clearInterval(timeInterval);
+        score();
+    }
+}
 
+var timeReduced = function () {  
+    time++
+}
 //When the button is clicked this function is called to start the timer and display the questions
 function startQuiz() {
   startSectionEl.remove();
@@ -73,7 +80,7 @@ function startQuiz() {
   timeCountdown();
 
   displayQuestion(questionNumber);
-}
+};
 
 
 
@@ -97,42 +104,42 @@ var displayQuestion = function (questionIndex) {
   questionOptionEl = document.createElement("button");
   questionOptionEl.className = "options options1";
   questionOptionEl.textContent = questions[questionIndex].option1;
-  if (questions[questionIndex].correct === 1) {
-    questionOptionEl.setAttribute("id", "correct");
-  } else {
-    questionOptionEl.addClassName = "incorrect";
-  }
+    if (questions[questionIndex].correct === 1) {
+        questionOptionEl.setAttribute("id", "correct");
+    } else {
+        questionOptionEl.addClassName = "incorrect";
+    }
   optionsDivEl.appendChild(questionOptionEl);
 
   questionOptionEl = document.createElement("button");
   questionOptionEl.className = "options option2";
   questionOptionEl.textContent = questions[questionIndex].option2;
-  if (questions[questionIndex].correct === 2) {
-    questionOptionEl.setAttribute("id", "correct");
-  } else {
-    questionOptionEl.addClassName = "incorrect";
-  }
+    if (questions[questionIndex].correct === 2) {
+        questionOptionEl.setAttribute("id", "correct");
+    } else {
+        questionOptionEl.addClassName = "incorrect";
+    }
   optionsDivEl.appendChild(questionOptionEl);
 
   questionOptionEl = document.createElement("button");
   questionOptionEl.className = "options option3";
   questionOptionEl.textContent = questions[questionIndex].option3;
-  if (questions[questionIndex].correct === 3) {
-    questionOptionEl.setAttribute("id", "correct");
-  } else {
-    questionOptionEl.addClassName = "incorrect";
-  }
+    if (questions[questionIndex].correct === 3) {
+        questionOptionEl.setAttribute("id", "correct");
+    } else {
+        questionOptionEl.addClassName = "incorrect";
+    }
 
   optionsDivEl.appendChild(questionOptionEl);
 
   questionOptionEl = document.createElement("button");
   questionOptionEl.className = "options option4";
   questionOptionEl.textContent = questions[questionIndex].option4;
-  if (questions[questionIndex].correct === 4) {
-    questionOptionEl.setAttribute("id", "correct");
-  } else {
-    questionOptionEl.addClassName = "incorrect";
-  }
+    if (questions[questionIndex].correct === 4) {
+        questionOptionEl.setAttribute("id", "correct");
+    } else {
+        questionOptionEl.addClassName = "incorrect";
+    }
   optionsDivEl.appendChild(questionOptionEl);
 
   const btnOptions = document.getElementsByClassName('options');
@@ -141,32 +148,41 @@ var displayQuestion = function (questionIndex) {
       btnOptions[i].addEventListener('click', function(){
         const btnId = this.getAttribute('id');
         if (btnId === 'correct'){
-           resultEl.append('correct')
+           resultEl.append('correct');
         } else {
-            resultEl.append('incorrect')
-                     
-        }
+            resultEl.append('incorrect');
+            timeReduced();
+        };
         nextButtonEl.addEventListener("click", function() {
-            questionNumber++
-            displayQuestion(questionNumber);
-           
-    })
-   
-   });
-   
-  };
- 
+            questionNumber++;
+            if (questionNumber > 4) {
+                displayQuestion(questionNumber);
+           } else {
+               score();
+           }
+     });
+     
 };
 
 
-// Var highScore = function() {
-// localStorage
+// var score = 0;
+// var highScore = 0;
+// var score = function () {  
+// localStorage.getItem("highScore", 0);
+
+// if(highScore !== null){
+//     if (score > parseInt(localStorage.getItem("highScore"))) {
+//         localStorage.setItem("highScore", score);
+//         alert("You've got the Highest Score!");
+//       }
+// }
+// else{
+//     localStorage.setItem("highScore", score);
+// }
 // }
 
 
 
-// highScore();
-
-startButtonEl.addEventListener("click", function () {
+startButtonEl.addEventListener("click", function() {
     startQuiz();
-  });
+});
