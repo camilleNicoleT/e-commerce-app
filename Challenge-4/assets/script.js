@@ -71,8 +71,9 @@ var timeCountdown = function () {
 }
 
 var timeReduced = function () {  
-    time++
+    time-= 10
 }
+
 //When the button is clicked this function is called to start the timer and display the questions
 function startQuiz() {
   startSectionEl.remove();
@@ -149,39 +150,41 @@ var displayQuestion = function (questionIndex) {
         const btnId = this.getAttribute('id');
         if (btnId === 'correct'){
            resultEl.append('correct');
+           score += 100
         } else {
             resultEl.append('incorrect');
             timeReduced();
         };
-        nextButtonEl.addEventListener("click", function() {
-            questionNumber++;
-            if (questionNumber > 4) {
-                displayQuestion(questionNumber);
-           } else {
-               score();
-           }
-     });
-     
-};
+      });
+    }
+}
 
 
-// var score = 0;
-// var highScore = 0;
-// var score = function () {  
-// localStorage.getItem("highScore", 0);
+var score = 0;
+var highScore = 0;
 
-// if(highScore !== null){
-//     if (score > parseInt(localStorage.getItem("highScore"))) {
-//         localStorage.setItem("highScore", score);
-//         alert("You've got the Highest Score!");
-//       }
-// }
-// else{
-//     localStorage.setItem("highScore", score);
-// }
-// }
+var savedScore = function () {  
+    console.log("I'm saved");
+localStorage.getItem("highScore");
 
+if(highScore !== null){
+    if (score > parseInt(localStorage.getItem("highScore"))) {
+        localStorage.setItem("highScore", score);
+      }
+}
+else{
+    localStorage.setItem("highScore", score);
+}
+}
 
+nextButtonEl.addEventListener("click", function() {
+    questionNumber++;
+    if (questionNumber < 4) {
+        displayQuestion(questionNumber);
+   } else {
+    savedScore();
+   }
+});
 
 startButtonEl.addEventListener("click", function() {
     startQuiz();
